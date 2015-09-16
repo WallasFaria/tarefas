@@ -13,11 +13,14 @@ class TarefaTest extends TestCase
 	 */
 	public function testCriarTarefa()
 	{
-		$this->post('/tarefa', array(
+		$tarefa = array(
 			'titulo'  => 'Comprar Leite',
 			'data'    => '2015-09-17 09:45',
-			'lembrar' => true
-		))
-		->seeJson(['created' => true]);
+			'lembrar' => true,
+			'grupo'   => 1,
+		);
+
+		$this->post('/tarefa', $tarefa)
+		->seeJson(array("created" => true));
 	}
 }
