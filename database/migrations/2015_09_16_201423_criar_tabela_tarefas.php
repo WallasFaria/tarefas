@@ -16,11 +16,10 @@ class CriarTabelaTarefas extends Migration
           $t->increments('id');
           $t->string('titulo');
           $t->string('descricao')->nullable();
-          $t->datetime('data')->nullable();
-          $t->boolean('lembrar')->default(false);
+          $t->integer('ordem')->nullable();
           $t->datetime('feito')->nullable();
           $t->datetime('arquivado')->nullable();
-          $t->integer('grupo');
+          $t->integer('grupo')->nullable();
           $t->timestamps();
         });
     }

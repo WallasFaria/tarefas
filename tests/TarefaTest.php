@@ -21,6 +21,12 @@ class TarefaTest extends TestCase
 		);
 
 		$this->post('/tarefa', $tarefa)
-		->seeJson(array("created" => true));
+			->seeJson(array("criado" => true));
+	}
+
+	public function testMarcarTarefaComoFeito()
+	{
+		$this->put('/tarefa/4/feito', [])
+			->seeJson(array("feito" => true));
 	}
 }
