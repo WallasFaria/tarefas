@@ -2,24 +2,36 @@ var app = angular.module('mainModule', ['ui.sortable']);
 
 app.controller('mainController', function($scope, $http) {
 	$scope.tarefas = [];
-	$scope.nome = '';
+	$scope.tarefa = {id: 0, titulo: ''};
+	$scope.titulo = '';
+	$scope.edicao = false;
 
 	$scope.editar = function (tarefa) {
-		$scope.nome = tarefa.titulo;
+		$scope.tarefa = tarefa;
+		$scope.titulo = tarefa.titulo;
+		$scope.edicao = true;
 	}
 
 	$http.get('/tarefa').success(function(data) {
 		$scope.tarefas = data;
 	});
 	
-	$scope.criar = function (keyEvent) {
-		if (keyEvent.which === 13) {
-			tarefa = {titulo: $scope.nome, grupo: 1}; 	
+	$scope.salvar = function (keyEvent) {
+		if ($scope.edicao && keyEvent.which === 13) {
+			tarefa = {id: $scope.tarefa.id, titulo: $scope.titulo}; 	
+			$http.put('/tarefa', {tarefas: [tarefa]}).success(function(data) {
+				$scope.tarefa.titulo = $scope.titulo;
+				$scope.edicao = false;
+				$scope.titulo = '';
+			});
+		} 
+		else if (keyEvent.which === 13) {
+			tarefa = {titulo: $scope.titulo, grupo: 1}; 	
 			$http.post('/tarefa', tarefa).success(function(data) {
 				if (data.criado) {$scope.tarefas.push(data.tarefa)};
-				$scope.nome = '';
+				$scope.titulo = '';
 			});
-		};
+		}
 	}
 
 	$scope.sortableOptions = {

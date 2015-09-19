@@ -10,7 +10,7 @@
 
     <h1 class="titulo">Tarefas</h1>
 
-    <input type="text" id="new" ng-model="nome" ng-keypress="criar($event)" class="form-control" placeholder="Nova Tarefa">
+    <input type="text" id="new" ng-model="titulo" ng-keypress="salvar($event)" class="form-control" placeholder="Nova Tarefa">
     <div class="well">
       <div class="list-group" ng-model="tarefas" ui-sortable="sortableOptions">
         <div ng-repeat="tarefa in tarefas" class="tarefa list-group-item">
