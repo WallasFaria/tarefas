@@ -23,11 +23,6 @@ class TarefaController extends Controller
             return response('Não foi possível salvar', 401);
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function update(Request $request, $id)
     {
         //
@@ -35,7 +30,7 @@ class TarefaController extends Controller
 
     public function destroy($id)
     {
-        //
+        return ['excluido' => Tarefa::find($id)->delete()];
     }
 
     public function updateAll(Request $request)

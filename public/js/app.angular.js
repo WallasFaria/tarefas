@@ -12,6 +12,13 @@ app.controller('mainController', function($scope, $http) {
 		$scope.edicao = true;
 	}
 
+	$scope.excluir = function (tarefa) {
+		$http.delete('/tarefa/'+tarefa.id).success(function(data) {
+			index = $scope.tarefas.indexOf(tarefa);
+			$scope.tarefas.splice(index, 1);
+		});
+	}
+
 	$http.get('/tarefa').success(function(data) {
 		$scope.tarefas = data;
 	});

@@ -16,8 +16,8 @@
         <div ng-repeat="tarefa in tarefas" class="tarefa list-group-item">
           <div class="acoes">
             <ul>
-              <li><a href="">R</a></li>
-              <li ng-click="editar(tarefa)">E</li>
+              <li><span ng-click="excluir(tarefa)">R</span></li>
+              <li><span ng-click="editar(tarefa)">E</span></li>
               <li>#</li>
             </ul>
           </div>
